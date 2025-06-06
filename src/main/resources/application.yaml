@@ -19,6 +19,8 @@ spring:
   sql:
     init:
       mode: always
+  messages:
+    basename: messages
 
 jwt:
   secret: my-secret-key-that-should-be-long-and-secure

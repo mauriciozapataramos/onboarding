@@ -1,11 +1,17 @@
 package com.jmzr.onboarding.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.jmzr.onboarding.model.ErrorResponse;
 
-@AllArgsConstructor
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 @Getter
-public class AuthResponse {
+@Setter
+@NoArgsConstructor
+@SuperBuilder
+public class AuthResponse extends ErrorResponse {
 	private String token;
 
 }
