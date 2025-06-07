@@ -43,7 +43,7 @@ public class AuthController {
 		}
 		catch (BadCredentialsException e) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-					.body(ErrorResponse.builder().code(message.getCode(MessageKeys.AUTH_BAD_CREDENTIALS))
+					.body(ErrorResponse.builder().code(message.getCode(MessageKeys.AUTH_PASSWORD_INCORRECT))
 							.message(e.getMessage()).build());
 
 		}

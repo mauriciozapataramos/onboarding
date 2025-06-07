@@ -23,7 +23,7 @@ public class FallbackController {
 	@RequestMapping("/**")
 	public ResponseEntity<ErrorResponse> fallback(HttpServletRequest request) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND)
-				.body(ErrorResponse.builder().code(message.getCode(MessageKeys.AUTH_RUTA_NO_EXISTE))
-						.message(message.getMessage(MessageKeys.AUTH_RUTA_NO_EXISTE)).build());
+				.body(ErrorResponse.builder().code(message.getCode(MessageKeys.ERROR_RUTA_NO_EXISTE))
+						.message(message.getMessage(MessageKeys.ERROR_RUTA_NO_EXISTE)).build());
 	}
 }

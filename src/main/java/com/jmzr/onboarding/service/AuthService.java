@@ -6,8 +6,6 @@ import com.jmzr.onboarding.security.JwtService;
 import com.jmzr.onboarding.util.MessageKeys;
 import com.jmzr.onboarding.util.MessageUtil;
 
-import io.micrometer.common.util.StringUtils;
-
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -41,7 +39,7 @@ public class AuthService {
 		
 
 		if (!passwordEncoder.matches(password, userEntity.getPassword())) {
-			throw new BadCredentialsException(message.getMessage(MessageKeys.AUTH_BAD_CREDENTIALS));
+			throw new BadCredentialsException(message.getMessage(MessageKeys.AUTH_PASSWORD_INCORRECT));
 		}
 
 		Collection<GrantedAuthority> authorities = userEntity.getRoles().stream()
