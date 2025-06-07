@@ -21,6 +21,10 @@ spring:
       mode: always
   messages:
     basename: messages
+    encoding: UTF-8
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
 
 jwt:
   secret: my-secret-key-that-should-be-long-and-secure
