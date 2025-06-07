@@ -1,5 +1,7 @@
 package com.jmzr.onboarding.controller.exception;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +12,6 @@ import com.jmzr.onboarding.util.MessageUtil;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 
 @RestController
 public class FallbackController {
@@ -24,6 +25,6 @@ public class FallbackController {
 	public ResponseEntity<ErrorResponse> fallback(HttpServletRequest request) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND)
 				.body(ErrorResponse.builder().code(message.getCode(MessageKeys.ERROR_RUTA_NO_EXISTE))
-						.message(message.getMessage(MessageKeys.ERROR_RUTA_NO_EXISTE)).build());
+						.message(message.getMessage(MessageKeys.ERROR_RUTA_NO_EXISTE)).errors(List.of()).build());
 	}
 }
