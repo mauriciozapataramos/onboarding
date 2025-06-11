@@ -18,7 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/onboarding")
 public class AuthController {
 
 	private final AuthService authService;
@@ -33,9 +33,10 @@ public class AuthController {
 	public ResponseEntity<? extends ErrorResponse> login(@Valid @RequestBody AuthRequest request) {
 		try {
 			String token = authService.login(request.getUsername(), request.getPassword());
-
+			List<String> roles = authService.getRoles(token);
 			return ResponseEntity.ok(AuthResponse.builder().token(token).code(message.getCode(MessageKeys.AUTH_SUCCESS))
-					.message(message.getMessage(MessageKeys.AUTH_SUCCESS)).build());
+					.message(message.getMessage(MessageKeys.AUTH_SUCCESS)).sub(authService.username(token)).roles(roles)
+					.errors(List.of()).build());
 
 		} catch (UsernameNotFoundException e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)

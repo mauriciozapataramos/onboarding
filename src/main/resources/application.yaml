@@ -25,12 +25,26 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+  cloud:
+    discovery:
+      enabled: true
 
 jwt:
   secret: my-secret-key-that-should-be-long-and-secure
-  expiration: 3600000 # 1 hora en milisegundos
+  expiration: 3600000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true        # ✅ Usa la IP en vez del hostname
+    hostname: localhost            # ✅ Opcional: fuerza el uso de localhost como nombre
 
 logging:
   level:
     org.springframework.security: DEBUG
-
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE

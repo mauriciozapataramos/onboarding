@@ -13,7 +13,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,10 +35,9 @@ public class AuthService {
 	}
 
 	public String login(String username, String password) {
-				
+
 		UserEntity userEntity = userRepo.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException(message.getMessage(MessageKeys.AUTH_USER_NOT_FOUND)));
-		
 
 		if (!passwordEncoder.matches(password, userEntity.getPassword())) {
 			throw new BadCredentialsException(message.getMessage(MessageKeys.AUTH_PASSWORD_INCORRECT));
@@ -48,5 +49,13 @@ public class AuthService {
 		String token = jwtService.generateToken(userEntity.getUsername(), authorities);
 
 		return token;
+	}
+
+	public List<String> getRoles(String token) {
+		return jwtService.extractRoles(token);
+	}
+	
+	public String username(String token) {
+		return jwtService.extractUsername(token);
 	}
 }
